@@ -2,8 +2,7 @@
 class Router 
 {
   private static $instance = null;
-  
-  public $routes = null;
+  private $routes = null;
   
   private function __construct() 
   {

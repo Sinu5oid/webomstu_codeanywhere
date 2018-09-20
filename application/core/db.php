@@ -3,7 +3,7 @@ class DB
 {
   private static $instance = null;
   
-  public function getInstance()
+  public static function getInstance()
   {
     if(is_null(self::$instance))
     {
@@ -12,9 +12,11 @@ class DB
     return self::$instance;
   }
   
-  private $coonnection = null;
+  private $connection = null;
   
   private $config = null;
+  
+  private $error = null;
   
   public function __construct()
   {
@@ -27,10 +29,16 @@ class DB
   
   public function query(string $request, array $params = [])
   {
+    $lastId = $this->getLastId();
     $statment = $this->connection->prepare($request);
     $result = $statment->execute($params);
+    $this->error = $statment->errorInfo();
     if($result)
     {
+      if($this->getLastId() != $lastId)
+      {
+        return $result;
+      }
       return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
     return $result;
@@ -38,10 +46,10 @@ class DB
   
   public function getError()
   {
-    return $this->connection->errorInfo();
+    return $this->error;
   }
   
-  public function lastId()
+  public function getLastId()
   {
     return $this->connection->lastInsertId();
   }
