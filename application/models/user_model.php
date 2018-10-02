@@ -93,7 +93,7 @@ class UserModel extends Model
       update_date = NOW()
     WHERE id = ?  
       ', [
-        $password,
+        md5($password),
         $id
       ]);
   }

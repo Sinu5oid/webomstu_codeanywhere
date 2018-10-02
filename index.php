@@ -1,7 +1,7 @@
 <?php
 define('APP_PATH', '/home/cabox/workspace/');
 //подключение файлов ядра
-$core = glob(APP_PATH.'application/core/*');
+$core = glob(APP_PATH.'application/core/*.php');
 foreach($core as $path)
 {
   require_once($path);

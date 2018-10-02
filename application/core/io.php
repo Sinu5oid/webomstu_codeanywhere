@@ -21,10 +21,10 @@ class IO
     return null;
   }
   
-  //доступ к данных переданных методом POST из потока
-  public static function postRow() : string
+  //доступ к необрботанным данным, переданным методом POST
+  public static function postRaw()
   {
-    return '';
+    return self::readFile('php://input');
   }
   
   //форматированный вывод отладочной информации
@@ -34,5 +34,21 @@ class IO
     var_dump($string);
     echo'</pre>';
   }
+  
+  //прочитать содержимое файла в строку
+  public static function readFile(string $file_path)
+  {
+    $file_content = null;
+    $file = fopen($file_path, 'r');
+    if($file) {
+      $file_content = '';
+      while(!feof($file))
+      {
+        $file_content .= fread($file, 255);
+      }
+    }
+    return $file_content;
+  }
+  
   
 }

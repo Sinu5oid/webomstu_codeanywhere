@@ -34,7 +34,7 @@ class Router
   
   public function process()
   {
-    $request = $_SERVER['REQUEST_URI'];
+    $request = preg_replace('~[?].*~', '', $_SERVER['REQUEST_URI']);
     $method = strtolower($_SERVER['REQUEST_METHOD']);
     //получаем список роутов
     $routes = array_merge(!empty($this->routes['any']) ? $this->routes['any'] : [], !empty($this->routes[$method]) ? $this->routes[$method] : []);
@@ -61,14 +61,14 @@ class Router
         //подключение файла контроллера
         require_once(APP_PATH.'application/controllers/'.$handler_parts[0].'_controller.php');
         //проверка наличия класса обработчика  
-        $className = ucfirst($handler_parts[0]).'Controller';
-        if(!class_exists($className))
+        $class_name = ucfirst($handler_parts[0]).'Controller';
+        if(!class_exists($class_name))
         {
           echo 'Controller class not exists!';
           require_once APP_PATH.'404.php';
           die();
         }
-        $obj = new $className();
+        $obj = new $class_name();
         $method = 'index';
         //проверка метода
         if(count($handler_parts) > 1)
@@ -103,7 +103,7 @@ class Router
         }
         else
         {
-          call_user_func_array([$className, $method], $args);
+          call_user_func_array([$class_name, $method], $args);
         }
         return;
       }
