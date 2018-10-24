@@ -8,16 +8,22 @@ class SessionModel extends Model
     $id = $user_model->login($login, $password);
     if($id > 0)
     {
+      $token = $this->createToken($id, $login);
+    }
+    return $token;
+  }
+  
+  public function createToken(int $id, string $login)
+  {
+    $token = md5($id.'_'.$login.'_'.time());
+    while($this->checkToken($token))
+    {
       $token = md5($id.'_'.$login.'_'.time());
-      while($this->checkToken($token))
-      {
-        $token = md5($id.'_'.$login.'_'.time());
-      }
-      $res = $this->db->query('INSERT INTO sessions (token, user_id, date) VALUES (?, ?, NOW())', [$token, $id]);
-      if(!$res)
-      {
-        $token = '';
-      }
+    }
+    $res = $this->db->query('INSERT INTO sessions (token, user_id, date) VALUES (?, ?, NOW())', [$token, $id]);
+    if(!$res)
+    {
+      $token = '';
     }
     return $token;
   }

@@ -97,4 +97,15 @@ class UserModel extends Model
         $id
       ]);
   }
+  
+  public function isLoginExists(string $login) : bool
+  {
+    return !empty($this->db->query('SELECT id FROM users WHERE login = ?', [$login]));
+  }
+
+  public function isEmailExists(string $email) : bool 
+  {
+    return !empty($this->db->query('SELECT id FROM users WHERE email = ?', [$email]));
+  }
 }
+
