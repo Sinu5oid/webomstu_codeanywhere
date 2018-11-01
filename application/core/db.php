@@ -35,11 +35,15 @@ class DB
     $this->error = $statment->errorInfo();
     if($result)
     {
-      if($this->getLastId() != $lastId)
+      try
+      {
+        return $statment->fetchAll(PDO::FETCH_ASSOC);;
+      }
+      catch(Exception $e)
       {
         return $result;
       }
-      return $statment->fetchAll(PDO::FETCH_ASSOC);
+      
     }
     return $result;
   }
@@ -51,6 +55,15 @@ class DB
   
   public function getLastId()
   {
-    return $this->connection->lastInsertId();
+    $statment = $this->connection->prepare('SELECT LAST_INSERT_ID() as last_insert_id');
+    if($statment->execute([]))
+    {
+      $result = $statment->fetchAll(PDO::FETCH_ASSOC);
+      if(!empty($result))
+      {
+        return $result[0]['last_insert_id'];
+      }
+    }
+    return -1;
   }
 }
