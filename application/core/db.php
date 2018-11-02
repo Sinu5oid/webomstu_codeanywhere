@@ -37,7 +37,11 @@ class DB
     {
       try
       {
-        return $statment->fetchAll(PDO::FETCH_ASSOC);;
+        if($lastId == $this->getLastId())
+        {
+          return $statment->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $result;
       }
       catch(Exception $e)
       {

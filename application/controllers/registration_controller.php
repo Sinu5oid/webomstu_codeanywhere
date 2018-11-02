@@ -85,16 +85,28 @@ class RegistrationController extends Controller
       die();
     }
     $user_id = $user_model->addUser($data->login, $data->email, $data->password);
+    if($user_id < 0)
+    {
+      echo json_encode([
+        'success' => 0,
+        'error' => [
+          'code' => 207,
+          'message' => 'Error of creating user'
+        ]
+      ]);
+      die();
+    }
     //getting token
     $session_model = $this->loader->getModel('session');
     $token = $session_model->createToken($user_id, $data->login);
+
     if(empty($token))
     {
       echo json_encode([
         'success' => 0,
         'error' => [
-          'code' => 201,
-          'message' => 'Wrong login or password'
+          'code' => 208,
+          'message' => 'Error of creating token'
         ]
       ]);
       die();

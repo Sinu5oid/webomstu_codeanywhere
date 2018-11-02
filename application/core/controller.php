@@ -20,6 +20,10 @@ abstract class Controller
     try
     {
       $data = json_decode(IO::postRaw());
+      if(empty($data)) 
+      {
+        throw new Exception("Wrong JSON");
+      }
     }
     catch(Exception $e)
     {
