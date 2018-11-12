@@ -3,6 +3,9 @@ class BaseController extends Controller
 {
   public function index()
   {
-    echo '<h1>BASE INDEX</h1>';
+      $this->view->display('page', [
+          'title' => 'title',
+          'heading' => 'Heading'
+      ]);
   } 
 }

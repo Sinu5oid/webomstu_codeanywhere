@@ -99,7 +99,6 @@ class RegistrationController extends Controller
     //getting token
     $session_model = $this->loader->getModel('session');
     $token = $session_model->createToken($user_id, $data->login);
-
     if(empty($token))
     {
       echo json_encode([

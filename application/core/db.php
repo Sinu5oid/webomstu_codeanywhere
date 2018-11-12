@@ -17,7 +17,9 @@ class DB
   private $config = null;
   
   private $error = null;
-  
+
+  private $row_count = 0;
+
   public function __construct()
   {
     $this->config = Configuration::getConfiguration(); 
@@ -30,6 +32,7 @@ class DB
   public function query(string $request, array $params = [])
   {
     $lastId = $this->getLastId();
+    $count = 0;
     $statment = $this->connection->prepare($request);
     $result = $statment->execute($params);
     $this->error = $statment->errorInfo();
@@ -37,17 +40,19 @@ class DB
     {
       try
       {
-        if($lastId == $this->getLastId())
+        if($statment->columnCount() > 0)
         {
+          $this->row_count = 0;
           return $statment->fetchAll(PDO::FETCH_ASSOC);
         }
+        $this->row_count = $statment->rowCount();
         return $result;
       }
       catch(Exception $e)
       {
+        $this->row_count = 0;
         return $result;
       }
-      
     }
     return $result;
   }
@@ -69,5 +74,10 @@ class DB
       }
     }
     return -1;
+  }
+
+  public function getRowCount()
+  {
+      return $this->row_count;
   }
 }

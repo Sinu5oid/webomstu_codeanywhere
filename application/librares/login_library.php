@@ -20,7 +20,7 @@ class LoginLibrary
   }
   
   //выход и удаление из сессии данных пользователя
-  public logout() : bool
+  public function logout() : bool
   {
     if(session_start())
     {
@@ -63,7 +63,7 @@ class LoginLibrary
   }
   
   //проверка авторизации пользователя
-  public checkLogin() : bool
+  public function checkLogin() : bool
   {
     return !empty($this->getUser());
   }

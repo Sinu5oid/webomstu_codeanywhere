@@ -44,8 +44,8 @@ class UserModel extends Model
       $login,
       $email,
       md5($password),
-      (new DateTime())->format(DateTime::W3C),
-      (new DateTime())->format(DateTime::W3C)
+      (new DateTime())->format('Y-m-d H:i:s'),
+      (new DateTime())->format('Y-m-d H:i:s')
     ]);
     if($res)
     {

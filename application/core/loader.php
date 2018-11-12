@@ -25,27 +25,4 @@ class Loader
     }
     return new $model_class();
   }
-  
-  //загрузка представления
-  public function getView(string $view, array $data = [], bool $output_flag = true)
-  {
-    if(empty($view))
-    {
-      return null;
-    }
-    //загрузка содержимого шаблона
-    $view_content = IO::readFile($view);
-    if(is_null($view_content))
-    {
-      return $view_content;
-    }
-    //сохранение переменных
-    $view_data = '<?php';
-    foreach($data as $name => $value)
-    {
-      $view_data .= '$'.$name.' = '.$value.';';
-    }
-    $view_data = '?>';
-    
-  }
 }

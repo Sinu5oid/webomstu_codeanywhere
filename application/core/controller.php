@@ -3,11 +3,13 @@ abstract class Controller
 {
   protected $loader = null;
   protected $config = null;
+  protected $view = null;
   
   public function __construct()
   {
     $this->loader = new Loader();
-    $config = Configuration::getConfiguration();
+    $this->config = Configuration::getConfiguration();
+    $this->view = View::getInstanse();
   }
   
   public abstract function index();
