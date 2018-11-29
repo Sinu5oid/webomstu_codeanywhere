@@ -25,4 +25,29 @@ class Loader
     }
     return new $model_class();
   }
+  
+  //загрузка библиотеки
+  public function getLibrary(string $library)
+  {
+    if(empty($library))
+    {
+      return null;
+    }
+    $library = str_replace('_library', '', $library);
+    //проверка наличия файла библиотеки
+    $library_path = APP_PATH.'application/libraries/'.$library.'_library.php';
+    if(!file_exists($library_path))
+    {
+      return null;
+    }
+    //загрузка библиотеки
+    require_once($library_path);
+    //проверка наличия класса библиотеки
+    $library_class = ucfirst($library).'Library';
+    if(!class_exists($library_class))
+    {
+      return null;
+    }
+    return new $library_class();
+  }
 }

@@ -4,7 +4,9 @@ class View
     private static $instanse = null;
 
     private $smarty = null;
-
+ 
+    private $config = null;
+  
     public static function getInstanse()
     {
         if(is_null(self::$instanse))
@@ -16,15 +18,15 @@ class View
 
     private function __construct()
     {
-        $config = Configuration::getConfiguration();
+        $this->config = Configuration::getConfiguration();
         //load template engine
         require_once (APP_PATH.'system/smarty/Smarty.class.php');
         $this->smarty = new Smarty();
         //configure engine
-        $this->smarty->setTemplateDir($config->smarty['templates_dir']);
-        $this->smarty->setConfigDir($config->smarty['configs_dir']);
-        $this->smarty->setCompileDir($config->smarty['compile_dir']);
-        $this->smarty->setCacheDir($config->smarty['cache_dir']);
+        $this->smarty->setTemplateDir($this->config->smarty['templates_dir']);
+        $this->smarty->setConfigDir($this->config->smarty['configs_dir']);
+        $this->smarty->setCompileDir($this->config->smarty['compile_dir']);
+        $this->smarty->setCacheDir($this->config->smarty['cache_dir']);
     }
 
     public function display(string $view, array $data = [])
@@ -82,6 +84,7 @@ class View
 
     private function assignData(array $data)
     {
+        $this->smarty->assign('base_url', $this->config->common['base_url']);
         if(!empty($data))
         {
             $keys = array_keys($data);
