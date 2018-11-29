@@ -3,6 +3,7 @@
 <html>
   <head>
       <link href="http://{$base_url}res/css/bootstrap.min.css" rel="stylesheet">
+      <link href="http://{$base_url}res/css/font-awesome.min.css" rel="stylesheet">
       <script src="http://{$base_url}res/js/jquery-3.3.1.min.js"></script>
       <script src="http://{$base_url}res/js/bootstrap.min.js"></script>
       <title>

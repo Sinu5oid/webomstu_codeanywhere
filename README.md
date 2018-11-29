@@ -81,6 +81,8 @@
 ##### 4. БАЗОВАЯ РАБОТА С КЛИЕНТОМ: #####
 > Репозиторий примера клиента на C# [github.com/Alexandr1994/client_csharp_ex](https://github.com/Alexandr1994/client_csharp_ex)
 
+> Репозиторий примера клиента для Android [github.com/Alexandr1994/client_android](https://github.com/Alexandr1994/client_android)
+
 #### ПЕРЕЧЕНЬ ОШИБОК API: ####
 
 ##### 1xx - общие ошибки входных данных: #####
@@ -98,6 +100,14 @@
 - 205 - указанный e-mail уже содержится в базе данных;
 - 206 - невалидный паролm
 - 207 - ошибка добавления пользователя
+- 208 - ошибка создания токена
+
+#### ПЕРЕЧЕНЬ КОМПОНЕНТОВ WEB-ИНТЕРФЕЙСА: ####
+- Шаблонизатор [Smarty 3.1.33](https://www.smarty.net/docs/en/) (для работы необходима директории temp/smarty с поддиректриями cache, config, compile (см. настройки Smarty в config.php))
+- JS/CSS-фреймворк [Bootstrap 4.1.3](http://bootstrap-4.ru/docs/4.1/getting-started/introduction/)
+- JS-библиотека [jQuery 3.3.1](https://api.jquery.com/)
+- Коллекция иконок [FontAwesome 4.7](https://fontawesome.com/v4.7.0/icons/)
+
 
 
 

@@ -39,7 +39,7 @@ abstract class Controller
       die();
     }
     //проверка наличия токена
-    if($token_flag)
+    if(!empty($token_flag))
     {
       if(!property_exists($data, 'token'))
       {
@@ -54,7 +54,7 @@ abstract class Controller
       }
     }
     //проверка наличия данных
-    if($data_flag)
+    if(!empty($data_flag))
     {
       if(!property_exists($data, 'data'))
       {
