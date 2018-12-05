@@ -39,6 +39,13 @@ class Configuration
     'prefix'    => ''
   ];
   
+  private $smarty = [
+      'templates_dir' => APP_PATH.'application/views',
+      'configs_dir' => APP_PATH.'temp/smarty/config',
+      'compile_dir' => APP_PATH.'temp/smarty/compile',
+      'cache_dir' => APP_PATH.'temp/smarty/cache'
+  ];
+  
   //настройки почты
   private $mail = [];
 }
