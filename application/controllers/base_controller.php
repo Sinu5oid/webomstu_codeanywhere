@@ -6,10 +6,12 @@ class BaseController extends Controller
       $login_library = $this->loader->getLibrary('login');
       if($login_library->checkLogin())
       {
+        $user = $login_library->getUser();
         $this->view->display('pages/base', [
-          'login_flag' => true,
-          'title' => 'title',
-          'heading' => 'Heading'
+          'login_flag'  => true,
+          'user'        => $user,
+          'title'       => 'Account',
+          'heading'     => 'Welcome, '.ucfirst($user['login'])
         ]);
       }
       else
@@ -17,6 +19,5 @@ class BaseController extends Controller
         $url = $this->loader->getLibrary('url');
         $url->redirect($this->config->common['base_url'].'login');
       }
-      
   } 
 }
