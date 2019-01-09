@@ -103,7 +103,7 @@ class Router
         }
         else
         {
-          call_user_func_array([$class_name, $method], $args);
+          call_user_func_array([$obj, $method], $args);
         }
         return;
       }

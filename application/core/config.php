@@ -27,7 +27,7 @@ class Configuration
   
   //общие настройки
   private $common = [
-    'base_url'    => 'web_omstu-borntokill1361002.codeanyapp.com'
+    'base_url'    => 'WebOmSTU-sinu5oid.codeanyapp.com/'
   ];
   
   //настройки базы данных
@@ -35,7 +35,7 @@ class Configuration
     'host'      => 'localhost',
     'dbname'    => 'web_db',
     'login'     => 'web_user',
-    'password'  => 'web_password',
+    'password'  => 'MahD9dsqIt',
     'prefix'    => ''
   ];
   
